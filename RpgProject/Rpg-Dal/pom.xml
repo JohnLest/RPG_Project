@@ -17,9 +17,17 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
+    <dependency> 
+      <groupId>masi.rpg</groupId>
+      <artifactId>Rpg-Database</artifactId> 
+    </dependency> 
     <dependency>
       <groupId>masi.rpg</groupId>
       <artifactId>Rpg-Model</artifactId>
+    </dependency>
+    <dependency>     
+      <groupId>masi.rpg</groupId>      
+      <artifactId>Utils</artifactId>   
     </dependency>
     
     <dependency>

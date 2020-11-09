@@ -13,6 +13,10 @@
   <name>Rpg-Model</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+      <dependency>     
+        <groupId>masi.rpg</groupId>      
+        <artifactId>Utils</artifactId>  
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

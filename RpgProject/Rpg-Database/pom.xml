@@ -1,35 +1,28 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  
   <parent>
     <groupId>masi.rpg</groupId>
     <artifactId>RpgProject</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-
   <groupId>masi.rpg</groupId>
-  <artifactId>Rpg-App</artifactId>
+  <artifactId>Rpg-Database</artifactId>
   <version>1.0-SNAPSHOT</version>
-
-  <name>Rpg-App</name>
+  <name>Rpg-Database</name>
   <url>http://maven.apache.org</url>
-
   <dependencies>
-    <dependency>
-      <groupId>masi.rpg</groupId>
-      <artifactId>Rpg-Bll</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>masi.rpg</groupId>
-      <artifactId>Rpg-Model</artifactId>
-    </dependency>
     <dependency>     
       <groupId>masi.rpg</groupId>      
       <artifactId>Utils</artifactId>   
     </dependency>
-    
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.22</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -37,5 +30,4 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>
