@@ -6,4 +6,6 @@ public interface IClasseService {
      * @param id Value of the primary key
      */
     public void GetById(int id);
+    
+    public void GetColumns();
 }

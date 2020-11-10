@@ -15,6 +15,6 @@ public class PersoControler {
 
     private void PersoControler(){
         classeService.GetById(3);
-        return;
+        classeService.GetColumns();
     }
 }
