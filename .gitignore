@@ -59,3 +59,9 @@ RpgProject/Rpg-Database/target/classes/masi/rpg/database/Connect.class
 RpgProject/Rpg-Database/target/classes/masi/rpg/database/Disconnect.class
 RpgProject/Tools/target/classes/johnlest/tools/GenericRepo.class
 RpgProject/Tools/target/classes/johnlest/tools/Tools.class
+RpgProject/Rpg-Bll/target/classes/masi/rpg/bll/services/ClasseService.class
+RpgProject/Rpg-Bll/target/classes/masi/rpg/bll/services/interfaces/IClasseService.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/ClasseRepo.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/IClasseRepo.class
+RpgProject/Tools/target/classes/johnlest/tools/genericRepo/GenericRepo.class
+RpgProject/Tools/target/classes/johnlest/tools/genericRepo/IGenericRepo.class

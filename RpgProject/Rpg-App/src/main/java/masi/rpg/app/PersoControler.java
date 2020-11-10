@@ -1,11 +1,12 @@
 package masi.rpg.app;
 
 import java.sql.Connection;
-import masi.rpg.bll.ClasseService;
+import masi.rpg.bll.services.*;
+import masi.rpg.bll.services.interfaces.*;
 
 public class PersoControler {
 
-    private ClasseService classeService;
+    private IClasseService classeService;
 
     public PersoControler(Connection connect) {
         this.classeService = new ClasseService(connect);
@@ -13,7 +14,7 @@ public class PersoControler {
     }
 
     private void PersoControler(){
-        classeService.getbyId(3);
+        classeService.GetById(3);
         return;
     }
 }

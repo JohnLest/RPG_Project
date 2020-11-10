@@ -1,12 +1,13 @@
-package johnlest.tools;
+package johnlest.tools.genericRepo;
 
 import java.sql.*;
 import java.util.*;
+import johnlest.tools.*;
 
 /**
  * GenericRepo
  */
-public class GenericRepo {
+public class GenericRepo implements IGenericRepo {
 
     protected String table;
     protected Connection connection;
@@ -22,72 +23,31 @@ public class GenericRepo {
     }
 
     //#region Public Methode
-    /**
-     * Get Row by ID 
-     * @param id primary Key value
-     * @return objects list
-     * @throws SQLException
-     */
     public List<Object> GetByID(int id) throws SQLException {
         String query = String.format("SELECT * FROM %s WHERE %s = %d ;", table, GetPrimaryKey(), id);
         return ResultRow(ExecuteQuery(query));
     }
-    /**
-     * Get all table
-     * @return Objects table
-     * @throws SQLException
-     */
     public List<List<Object>> GetAll() throws SQLException {
         String query = String.format("SELECT * FROM %s ;", table);
         return ResultTable(ExecuteQuery(query));
     }
-    /**
-     * Get all table with condition
-     * @param where Condition 
-     * @return Objects table
-     * @throws SQLException
-     */
     public List<List<Object>> GetAllWhere(String where) throws SQLException{
         String query = String.format("SELECT * FROM %s WHERE %s ;", table, where);
         return ResultTable(ExecuteQuery(query));
     }
-    /**
-     * Get the first row with condition
-     * @param where Condition
-     * @return Objexts List
-     * @throws SQLException
-     */
     public List<Object> GetFirst(String where) throws SQLException{
         String query = String.format("SELECT * FROM %s WHERE %s LIMIT 1 ;", table, where);
         return ResultRow(ExecuteQuery(query));
     }
-    /**
-     * Get some elements in the first row with condition
-     * @param elem Column list tu search
-     * @param where Condition
-     * @return Object List
-     * @throws SQLException
-     */
     public List<Object> GetFirst(List<String> elem, String where) throws SQLException{
         String query = String.format("SELECT * FROM %s WHERE %s LIMIT 1 ;", table, where);
         return ResultRow(ExecuteQuery(query));
     }
-    /**
-     * Count number of row in table
-     * @return Number
-     * @throws SQLException
-     */
     public int Count() throws SQLException{
         String query = String.format("SELECT COUNT (*) FROM %s ;", table);
         Object res = ResultRow(ExecuteQuery(query)).stream().findFirst();
         return (Tools.isNullOrEmpty(res)? 0 : (Integer)res);
     }
-    /**
-     * Count number of row in table with condition 
-     * @param where Condition
-     * @return Number
-     * @throws SQLException
-     */
     public int Count(String where) throws SQLException{
         String query = String.format("SELECT COUNT (*) FROM %s WHERE %s ;", table, where);
         Object res = ResultRow(ExecuteQuery(query)).stream().findFirst();

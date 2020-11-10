@@ -1,17 +1,20 @@
-package masi.rpg.bll;
+package masi.rpg.bll.services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import masi.rpg.dal.*;
 
-public class ClasseService {
-    private ClasseRepo classeRepo;
+import masi.rpg.bll.services.interfaces.IClasseService;
+import masi.rpg.dal.repositories.ClasseRepo;
+import masi.rpg.dal.repositories.interfaces.IClasseRepo;
+
+public class ClasseService implements IClasseService {
+    private IClasseRepo classeRepo;
 
     public ClasseService(Connection connect) {
         this.classeRepo = new ClasseRepo(connect);
     }
 
-    public void getbyId(int id) {
+    public void GetById(int id) {
         try {
             for (Object elem : classeRepo.GetByID(id)) {
                 System.out.println(elem);
