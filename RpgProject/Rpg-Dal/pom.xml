@@ -25,9 +25,9 @@
       <groupId>masi.rpg</groupId>
       <artifactId>Rpg-Model</artifactId>
     </dependency>
-    <dependency>     
-      <groupId>masi.rpg</groupId>      
-      <artifactId>Utils</artifactId>   
+    <dependency>
+      <groupId>johnlest</groupId>
+      <artifactId>Tools</artifactId>
     </dependency>
     
     <dependency>

@@ -1,7 +1,7 @@
 package masi.rpg.database;
 
 import java.sql.*;
-import masi.rpg.utils.*;
+import johnlest.tools.*;
 
 public class ConnectDB 
 {
@@ -12,8 +12,8 @@ public class ConnectDB
             System.out.println(e);
         }
         String connectionString = ConfigFile.config("rpg.connectionString").toString();
-        String user = SecretFile.config("rpg.user").toString();
-        String password = SecretFile.config("rpg.password").toString();
+        String user = ConfigFile.config("rpg.user", ".secret").toString();
+        String password = ConfigFile.config("rpg.password", ".secret").toString();
         Connection connexion = null;
         try {
             connexion = DriverManager.getConnection(connectionString, user, password);

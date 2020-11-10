@@ -2,21 +2,24 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>masi.rpg</groupId>
     <artifactId>RpgProject</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <groupId>masi.rpg</groupId>
   <artifactId>Rpg-Model</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Rpg-Model</name>
   <url>http://maven.apache.org</url>
+
   <dependencies>
-      <dependency>     
-        <groupId>masi.rpg</groupId>      
-        <artifactId>Utils</artifactId>  
-      </dependency>
+    <dependency>
+      <groupId>johnlest</groupId>
+      <artifactId>Tools</artifactId>
+    </dependency> 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -24,4 +27,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
 </project>

@@ -48,3 +48,9 @@ RpgProject/Rpg-Database/.settings/org.eclipse.m2e.core.prefs
 RpgProject/Rpg-Database/target/classes/masi/rpg/database/ConnectDB.class
 RpgProject/resources/.secret
 RpgProject/Rpg-Database/target/classes/masi/rpg/database/SecretFile.class
+RpgProject/Tools/.classpath
+RpgProject/Tools/.project
+RpgProject/Tools/.settings/org.eclipse.jdt.apt.core.prefs
+RpgProject/Tools/.settings/org.eclipse.jdt.core.prefs
+RpgProject/Tools/.settings/org.eclipse.m2e.core.prefs
+RpgProject/Tools/target/classes/johnlest/tools/ConfigFile.class

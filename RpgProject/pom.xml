@@ -42,12 +42,12 @@
         <artifactId>Rpg-Model</artifactId>   
         <version>1.0-SNAPSHOT</version>  
       </dependency>
-         
-      <dependency> 
-        <groupId>masi.rpg</groupId>
-        <artifactId>Utils</artifactId> 
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
+
+      <dependency>
+        <groupId>johnlest</groupId>
+        <artifactId>Tools</artifactId>
+        <version>1.201110</version>
+      </dependency> 
     </dependencies>
       
   </dependencyManagement>
@@ -58,7 +58,7 @@
     <module>Rpg-Dal</module>
     <module>Rpg-Database</module>  
     <module>Rpg-Model</module>
-    <module>Utils</module>
+    <module>Tools</module>
   </modules>
   
 </project>
