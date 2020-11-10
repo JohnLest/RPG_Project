@@ -1,12 +1,13 @@
 package masi.rpg.app;
 
-import masi.rpg.bll.*;
+import java.sql.Connection;
+import masi.rpg.database.*;
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World! Main" );
-        ClasseService.classeService();
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello World! Main");
+        Connection connect = Connect.connect();
+        new PersoControler(connect);
+        Disconnect.disconnect(connect);
     }
 }

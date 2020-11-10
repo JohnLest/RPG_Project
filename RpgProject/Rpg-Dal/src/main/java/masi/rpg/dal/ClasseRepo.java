@@ -2,9 +2,13 @@ package masi.rpg.dal;
 
 import masi.rpg.database.*;
 
-public class ClasseRepo 
+import java.sql.Connection;
+
+import johnlest.tools.*;
+
+public class ClasseRepo extends GenericRepo
 {
-    public static void classeRepo() {
-        ConnectDB.connectDB();
+    public ClasseRepo(Connection connection) {
+        super("`rpg.classe`", connection);
     }
 }
