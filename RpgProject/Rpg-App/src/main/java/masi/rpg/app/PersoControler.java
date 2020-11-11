@@ -13,8 +13,14 @@ public class PersoControler {
         PersoControler();
     }
 
-    private void PersoControler(){
-        classeService.GetById(3);
+    private void PersoControler() {
+        try {
+            classeService.GetById(3);
+        } catch (Exception e) {
+            System.out.println(e);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         classeService.GetColumns();
     }
 }

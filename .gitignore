@@ -65,3 +65,5 @@ RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/ClasseRepo.class
 RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/IClasseRepo.class
 RpgProject/Tools/target/classes/johnlest/tools/genericRepo/GenericRepo.class
 RpgProject/Tools/target/classes/johnlest/tools/genericRepo/IGenericRepo.class
+RpgProject/Rpg-Model/target/classes/masi/rpg/model/databaseModel/Classe.class
+RpgProject/Tools/target/classes/johnlest/tools/BaseBean.class
