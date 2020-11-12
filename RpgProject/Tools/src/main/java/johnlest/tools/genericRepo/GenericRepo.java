@@ -22,7 +22,16 @@ public class GenericRepo implements IGenericRepo {
 
     /**
      * Constructor
+     * @param connection
+     */
+    public GenericRepo(Connection connection) {
+        this.connection = connection;
+        this.qRunner = new QueryRunner();
+    }
+    /**
+     * Constructor
      * @param table
+     * @param bean
      * @param connection
      */
     public GenericRepo(String table, Class bean, Connection connection) {
@@ -30,7 +39,6 @@ public class GenericRepo implements IGenericRepo {
         this.connection = connection;
         this.bean = bean;
         this.qRunner = new QueryRunner();
-
     }
 
     //#region Public Methode
@@ -76,7 +84,7 @@ public class GenericRepo implements IGenericRepo {
         return (Tools.isNullOrEmpty(res)? 0 : (Integer)res);
     }
     public Object UseStorProc(String storProc) throws SQLException {
-        String query = String.format("USE %s", storProc);
+        String query = String.format("CALL %s ;", storProc);
         return ResultRowObject(query);
     }
 

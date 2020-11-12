@@ -115,8 +115,4 @@ public class Classe implements Serializable {
     public void setInitMax(int InitMax){
         this.InitMax = InitMax;
     }
-
-    public static Classe Format(Object obj){
-        return (Classe) obj;
-    }
 }

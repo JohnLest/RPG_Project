@@ -1,4 +1,4 @@
-CREATE VIEW combatants AS
+CREATE VIEW combatant AS
 SELECT 
 	p.ID_Perso AS ID,
     pre.Prenom, 

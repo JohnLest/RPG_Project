@@ -7,7 +7,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Hello World! Main");
         Connection connect = Connect.connect();
-        new PersoControler(connect);
+        new Controler(connect);
         Disconnect.disconnect(connect);
     }
 }

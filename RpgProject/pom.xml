@@ -46,7 +46,7 @@
       <dependency>
         <groupId>johnlest</groupId>
         <artifactId>Tools</artifactId>
-        <version>1.201110</version>
+        <version>1.201112</version>
       </dependency> 
     </dependencies>
       

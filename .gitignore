@@ -67,3 +67,11 @@ RpgProject/Tools/target/classes/johnlest/tools/genericRepo/GenericRepo.class
 RpgProject/Tools/target/classes/johnlest/tools/genericRepo/IGenericRepo.class
 RpgProject/Rpg-Model/target/classes/masi/rpg/model/databaseModel/Classe.class
 RpgProject/Tools/target/classes/johnlest/tools/BaseBean.class
+RpgProject/Rpg-Bll/target/classes/masi/rpg/bll/Mapping.class
+RpgProject/Rpg-Bll/target/classes/masi/rpg/bll/services/PersoService.class
+RpgProject/Rpg-Bll/target/classes/masi/rpg/bll/services/interfaces/IPersoService.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/NewPersoRepo.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/CombatantRepo.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/ICombatantRepo.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/INewPersoRepo.class
+RpgProject/Rpg-Model/target/classes/masi/rpg/model/databaseModel/Combatant.class
