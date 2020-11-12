@@ -1,7 +1,7 @@
 DELIMITER | 
 CREATE PROCEDURE newPerso ()
 BEGIN
-	declare maxPrenom int;
+		declare maxPrenom int;
     declare maxNom int;
     declare randPrenom int;
     declare randNom int;
@@ -25,24 +25,24 @@ BEGIN
     declare initMax tinyint unsigned;
     declare initVal tinyint unsigned;
     
-    SELECT COUNT(*) INTO maxPrenom
-    	FROM prenom;
-        
-    SELECT COUNT(*) INTO maxNom
-    	FROM nom;
-	
-    select round(1 + (RAND() * (maxPrenom - 1))) into randPrenom;
-    select round(1 + (RAND() * (maxNom - 1))) into randNom;
-    
-    select round(1 + (rand() * 3)) into randClasse;
+    select nom.ID_nom into randNom
+	from nom
+    order by rand()
+    LIMIT 1;
+ 
+	select pre.ID_Prenom into randPrenom
+	from prenom as pre
+    order by rand()
+    LIMIT 1;
     
     select 
-		c.AtkMin, c.AtkMax, c.DefMin, c.DefMax, c.PVMin, c.PVMax, c.CritMin, c.CritMax, c.ParadeMin, c.ParadeMax, c.InitMin, c.InitMax 
+		c.ID_Classe, c.AtkMin, c.AtkMax, c.DefMin, c.DefMax, c.PVMin, c.PVMax, c.CritMin, c.CritMax, c.ParadeMin, c.ParadeMax, c.InitMin, c.InitMax 
 	
     into
-		atkMin, atkMax, defMin, defMax, pvMin, pvMax, critMin, critMax, parMin, parMax, initMin, initMax
+		randClasse,  atkMin, atkMax, defMin, defMax, pvMin, pvMax, critMin, critMax, parMin, parMax, initMin, initMax
     from classe as c
-    where ID_Classe = randClasse;
+    order by rand()
+    limit 1;
 	
     select round((atkMin) + (RAND() * (atkMax - atkMin))) into atkVal;
     select round((defMin) + (RAND() * (defMax - defMin))) into defVal;
@@ -59,8 +59,7 @@ BEGIN
 		(ID_Nom, ID_Prenom, ID_Classe, AtkVal, DefVal, PVVal, CritVal, ParadeVal, InitVal, IsDeath, NbrCombat)
 	values 
 		(randNom, randPrenom, randClasse, atkVal, defVal, pvVal, critVal, parVal, initVal, 0, 0);
-	
     select 
-		randNom, randPrenom, randClasse, atkMin, atkMax, atkVal, defMin, defMax, defVal, pvMin, pvMax, pvVal, critVal, parMin, parMax, parVal, initVal, 0 as Isdeath, 0 as NbrCombat;
+		randNom, randPrenom, randClasse, atkVal, defVal, pvVal, critVal, parVal, initVal, 0 as Isdeath, 0 as NbrCombat;
 
 END|
