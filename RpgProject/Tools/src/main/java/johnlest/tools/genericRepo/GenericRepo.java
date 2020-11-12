@@ -75,6 +75,10 @@ public class GenericRepo implements IGenericRepo {
         Object res = Arrays.asList(ResultRowObject(query)).stream().findFirst();
         return (Tools.isNullOrEmpty(res)? 0 : (Integer)res);
     }
+    public Object UseStorProc(String storProc) throws SQLException {
+        String query = String.format("USE %s", storProc);
+        return ResultRowObject(query);
+    }
 
 
     //#endregion
