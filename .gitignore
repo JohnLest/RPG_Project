@@ -75,3 +75,8 @@ RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/CombatantRepo.class
 RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/ICombatantRepo.class
 RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/INewPersoRepo.class
 RpgProject/Rpg-Model/target/classes/masi/rpg/model/databaseModel/Combatant.class
+RpgProject/Rpg-App/target/classes/masi/rpg/app/Controler.class
+RpgProject/Rpg-App/target/classes/masi/rpg/app/Controler.class
+RpgProject/Rpg-Model/target/classes/masi/rpg/model/databaseModel/Perso.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/PersoRepo.class
+RpgProject/Rpg-Dal/target/classes/masi/rpg/dal/repositories/interfaces/IPersoRepo.class

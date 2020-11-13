@@ -21,5 +21,12 @@ public interface IPersoService {
      * @param id Value of the primary key
      */
     public void GetById(int id);
+
+    /**
+     * Update Conbatant view
+     * @param update CombatantBean
+     * @param id Id to update
+     */
+    public void UpdateView(Combatant c, int id);
     
 }

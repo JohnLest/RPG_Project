@@ -19,6 +19,7 @@ public class Connect {
             return DriverManager.getConnection(connectionString, user, password);
     
         } catch (SQLException e) {
+            System.out.println("-------- Erreur de connection ---------");
             System.out.println(e);
             return null;
         }

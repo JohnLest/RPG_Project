@@ -1,9 +1,6 @@
 package masi.rpg.model.databaseModel;
 
 import java.io.Serializable;
-import java.util.concurrent.PriorityBlockingQueue;
-
-import javax.swing.UIDefaults.ProxyLazyValue;
 
 public class Combatant implements Serializable{
     private int id;

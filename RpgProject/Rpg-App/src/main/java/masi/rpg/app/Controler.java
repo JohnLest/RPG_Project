@@ -1,6 +1,7 @@
 package masi.rpg.app;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import masi.rpg.bll.services.*;
@@ -17,10 +18,29 @@ public class Controler {
     }
 
     private void Controler() {
-        //persoService.CreateNewPerso();
+        /*
+        for (int i = 0; i < 20; i++) {
+            persoService.CreateNewPerso();
+        }*/
         List<Combatant> view =  persoService.GetConbatantView();
-        for (Combatant combatant : view) {
-            System.out.println(combatant.getPrenom() + combatant.getNom() + combatant.getClasse());
+        int size = view.size();
+        List<Combatant> equipeA = new ArrayList<>(view.subList(0, size/2));
+        List<Combatant> equipeB = new ArrayList<>(view.subList(size/2, size));
+
+        // --- Temps de combat ----
+        
+        for (Combatant combatant : equipeB) {
+            combatant.setPVVal(0);
+            combatant.setNbrCombat(combatant.getNbrCombat() + 1 );
+            persoService.UpdateView(combatant, combatant.getID());
         }
+
+        // ------------------------
+
+
+
+        System.out.println(equipeA);
+        System.out.println(equipeB);
+
     }
 }
