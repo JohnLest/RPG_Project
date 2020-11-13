@@ -1,7 +1,7 @@
 package masi.rpg.bll.services.interfaces;
 
 import java.util.List;
-import masi.rpg.model.databaseModel.Combatant;
+import masi.rpg.model.databaseModel.Combattant;
 
 public interface IPersoService {
 
@@ -11,10 +11,10 @@ public interface IPersoService {
     public void CreateNewPerso();
 
     /**
-     * Get Combatant view Limit 20
+     * Get Combattant view Limit 20
      * @return View
      */
-    public List<Combatant> GetConbatantView();
+    public List<Combattant> GetConbatantView();
     
     /**
      * Get Row by ID 
@@ -24,9 +24,9 @@ public interface IPersoService {
 
     /**
      * Update Conbatant view
-     * @param update CombatantBean
+     * @param update CombattantBean
      * @param id Id to update
      */
-    public void UpdateView(Combatant c, int id);
+    public void UpdateView(Combattant c, int id);
     
 }

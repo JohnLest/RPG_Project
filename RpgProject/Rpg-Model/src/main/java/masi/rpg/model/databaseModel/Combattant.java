@@ -2,7 +2,7 @@ package masi.rpg.model.databaseModel;
 
 import java.io.Serializable;
 
-public class Combatant implements Serializable{
+public class Combattant implements Serializable{
     private int id;
     private String prenom;
     private String nom;

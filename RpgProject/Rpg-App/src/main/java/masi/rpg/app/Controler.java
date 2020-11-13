@@ -6,7 +6,7 @@ import java.util.List;
 
 import masi.rpg.bll.services.*;
 import masi.rpg.bll.services.interfaces.*;
-import masi.rpg.model.databaseModel.Combatant;
+import masi.rpg.model.databaseModel.Combattant;
 
 public class Controler {
 
@@ -22,17 +22,17 @@ public class Controler {
         for (int i = 0; i < 20; i++) {
             persoService.CreateNewPerso();
         }*/
-        List<Combatant> view =  persoService.GetConbatantView();
+        List<Combattant> view =  persoService.GetConbatantView();
         int size = view.size();
-        List<Combatant> equipeA = new ArrayList<>(view.subList(0, size/2));
-        List<Combatant> equipeB = new ArrayList<>(view.subList(size/2, size));
+        List<Combattant> equipeA = new ArrayList<>(view.subList(0, size/2));
+        List<Combattant> equipeB = new ArrayList<>(view.subList(size/2, size));
 
         // --- Temps de combat ----
         
-        for (Combatant combatant : equipeB) {
-            combatant.setPVVal(0);
-            combatant.setNbrCombat(combatant.getNbrCombat() + 1 );
-            persoService.UpdateView(combatant, combatant.getID());
+        for (Combattant combattant : equipeB) {
+            combattant.setPVVal(0);
+            combattant.setNbrCombat(combattant.getNbrCombat() + 1 );
+            persoService.UpdateView(combattant, combattant.getID());
         }
 
         // ------------------------

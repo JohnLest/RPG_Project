@@ -6,23 +6,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 import masi.rpg.bll.Mapping;
 import masi.rpg.bll.services.interfaces.IPersoService;
-import masi.rpg.dal.repositories.CombatantRepo;
+import masi.rpg.dal.repositories.CombattantRepo;
 import masi.rpg.dal.repositories.NewPersoRepo;
 import masi.rpg.dal.repositories.PersoRepo;
-import masi.rpg.dal.repositories.interfaces.ICombatantRepo;
+import masi.rpg.dal.repositories.interfaces.ICombattantRepo;
 import masi.rpg.dal.repositories.interfaces.INewPersoRepo;
 import masi.rpg.dal.repositories.interfaces.IPersoRepo;
 import masi.rpg.model.databaseModel.Classe;
-import masi.rpg.model.databaseModel.Combatant;
+import masi.rpg.model.databaseModel.Combattant;
 import masi.rpg.model.databaseModel.Perso;
 
 public class PersoService implements IPersoService {
-    private ICombatantRepo combatantRepo;
+    private ICombattantRepo combattantRepo;
     private INewPersoRepo newPersoRepo;
     private IPersoRepo persoRepo;
 
     public PersoService(Connection connect) {
-        this.combatantRepo = new CombatantRepo(connect);
+        this.combattantRepo = new CombattantRepo(connect);
         this.newPersoRepo = new NewPersoRepo(connect);
         this.persoRepo = new PersoRepo(connect);
     }
@@ -36,12 +36,12 @@ public class PersoService implements IPersoService {
         }
     }
 
-    public List<Combatant> GetConbatantView() {
+    public List<Combattant> GetConbatantView() {
         try {
-            List<Object> vueObj = combatantRepo.GetAllWhere("1 LIMIT 20");
-            List<Combatant> vue = 
+            List<Object> vueObj = combattantRepo.GetAllWhere("1 LIMIT 20");
+            List<Combattant> vue = 
                 vueObj.stream()
-                    .map(obj -> Mapping.toCombatant(obj))
+                    .map(obj -> Mapping.toCombattant(obj))
                     .collect(Collectors.toList());
             return vue;
 
@@ -54,7 +54,7 @@ public class PersoService implements IPersoService {
 
     public void GetById(int id) {
         try {
-            Classe maclasse = Mapping.toClasse(combatantRepo.GetByID(4));
+            Classe maclasse = Mapping.toClasse(combattantRepo.GetByID(4));
             System.out.println(maclasse.getNom_Classe());
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -62,9 +62,9 @@ public class PersoService implements IPersoService {
         }
     }
 
-    public void UpdateView(Combatant c, int id) {
+    public void UpdateView(Combattant c, int id) {
         try {
-            Perso perso = Mapping.combatantToPerso(c);
+            Perso perso = Mapping.combattantToPerso(c);
             String where = String.format("ID_Perso = %d", id);
             persoRepo.Update(perso, where);
         } catch (SQLException e) {
