@@ -14,8 +14,15 @@ public interface IPersoService {
      * Get Combattant view Limit 20
      * @return View
      */
-    public List<Combattant> GetConbatantView();
+    public List<Combattant> GetCombattantView();
     
+    /**
+     * Prepare the teams
+     * @param equipe
+     * @param nom
+     */
+    public void SetEquipe(List<Combattant> equipe, char nom);
+
     /**
      * Get Row by ID 
      * @param id Value of the primary key

@@ -21,25 +21,15 @@ public class Controler {
         for (int i = 0; i < 20; i++) {
             persoService.CreateNewPerso();
         }
-        List<Combattant> view =  persoService.GetConbatantView();
+        List<Combattant> view =  persoService.GetCombattantView();
         int size = view.size();
-        List<Combattant> equipeA = new ArrayList<>(view.subList(0, size/2));
-        List<Combattant> equipeB = new ArrayList<>(view.subList(size/2, size));
+        persoService.SetEquipe(view.subList(0, size/2), 'A');
+        persoService.SetEquipe(view.subList(size/2, size), 'B');
 
         // --- Temps de combat ----
         
-        for (Combattant combattant : equipeB) {
-            combattant.setPVVal(0);
-            combattant.setNbrCombat(combattant.getNbrCombat() + 1 );
-            persoService.UpdateView(combattant, combattant.getID());
-        }
 
         // ------------------------
-
-
-
-        System.out.println(equipeA);
-        System.out.println(equipeB);
 
     }
 }

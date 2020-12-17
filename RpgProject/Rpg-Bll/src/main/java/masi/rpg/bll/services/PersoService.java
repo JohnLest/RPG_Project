@@ -36,7 +36,7 @@ public class PersoService implements IPersoService {
         }
     }
 
-    public List<Combattant> GetConbatantView() {
+    public List<Combattant> GetCombattantView() {
         try {
             List<Object> vueObj = combattantRepo.GetAllWhere("1 LIMIT 20");
             List<Combattant> vue = 
@@ -49,6 +49,13 @@ public class PersoService implements IPersoService {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void SetEquipe(List<Combattant> equipe, char nom) {
+        for (Combattant combattant : equipe) {
+            combattant.setEquipe(nom);
+            combattant.setCaseDispo(4);
         }
     }
 
