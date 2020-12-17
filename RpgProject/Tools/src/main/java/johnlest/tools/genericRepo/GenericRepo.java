@@ -25,7 +25,8 @@ public class GenericRepo implements IGenericRepo {
      * 
      * @param connection
      */
-    public GenericRepo(Connection connection) {
+    public GenericRepo(String table, Connection connection) {
+        this.table = table;
         this.connection = connection;
         this.qRunner = new QueryRunner();
     }
@@ -95,8 +96,8 @@ public class GenericRepo implements IGenericRepo {
         return (Tools.isNullOrEmpty(res) ? 0 : (Integer) res);
     }
 
-    public Object UseStorProc(String storProc) throws SQLException {
-        String query = String.format("CALL %s ;", storProc);
+    public Object UseStorProc() throws SQLException {
+        String query = String.format("CALL %s ;", table);
         return ResultRowObject(query);
     }
 

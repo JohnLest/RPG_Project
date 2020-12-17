@@ -6,6 +6,6 @@ import masi.rpg.dal.repositories.interfaces.INewPersoRepo;
 
 public class NewPersoRepo extends GenericRepo implements INewPersoRepo{
     public NewPersoRepo(Connection connection) {
-        super(connection);
+        super("newPerso()", connection);
     }
 }

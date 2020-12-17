@@ -18,10 +18,9 @@ public class Controler {
     }
 
     private void Controler() {
-        /*
         for (int i = 0; i < 20; i++) {
             persoService.CreateNewPerso();
-        }*/
+        }
         List<Combattant> view =  persoService.GetConbatantView();
         int size = view.size();
         List<Combattant> equipeA = new ArrayList<>(view.subList(0, size/2));

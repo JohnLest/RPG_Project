@@ -29,7 +29,7 @@ public class PersoService implements IPersoService {
 
     public void CreateNewPerso() {
         try {
-            newPersoRepo.UseStorProc("newPerso()");
+            newPersoRepo.UseStorProc();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -54,8 +54,7 @@ public class PersoService implements IPersoService {
 
     public void GetById(int id) {
         try {
-            Classe maclasse = Mapping.toClasse(combattantRepo.GetByID(4));
-            System.out.println(maclasse.getNom_Classe());
+            Perso p = Mapping.toPerso(persoRepo.GetByID(id));
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
