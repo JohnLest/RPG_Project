@@ -1,6 +1,8 @@
 package masi.rpg.bll.services.interfaces;
 
 import java.util.List;
+
+import masi.rpg.model.DetailCombattant;
 import masi.rpg.model.databaseModel.Combattant;
 
 public interface IPersoService {
@@ -21,7 +23,7 @@ public interface IPersoService {
      * @param equipe
      * @param nom
      */
-    public void SetEquipe(List<Combattant> equipe, char nom);
+    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom);
 
     /**
      * Get Row by ID 

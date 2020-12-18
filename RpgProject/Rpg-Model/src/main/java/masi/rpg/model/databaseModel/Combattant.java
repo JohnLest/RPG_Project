@@ -17,11 +17,6 @@ public class Combattant implements Serializable{
     private int initVal;
     private int nbrCombat;
 
-    // Combat Data
-    private int caseDispo;
-    private char equipe;
-
-
     public int getID(){
         return this.id;
     }
@@ -97,25 +92,5 @@ public class Combattant implements Serializable{
     }
     public void setNbrCombat(int val){
         this.nbrCombat = val;
-    }
-
-    public int getCaseDispo() {
-        return this.caseDispo;
-    }
-    public void setCaseDispo(int val){
-        this.caseDispo = val;
-    }
-    public void clearCase() {
-        if(this.caseDispo < 4) this.caseDispo ++;
-    }
-    public void fillCase() {
-        if(this.caseDispo > 0) this.caseDispo --;
-    }
-
-    public char getEquipe() {
-        return this.equipe;
-    }
-    public void setEquipe(char val) {
-        this.equipe = val;
     }
 }

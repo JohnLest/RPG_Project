@@ -2,6 +2,7 @@ package masi.rpg.bll.services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import masi.rpg.bll.Mapping;
@@ -12,7 +13,7 @@ import masi.rpg.dal.repositories.PersoRepo;
 import masi.rpg.dal.repositories.interfaces.ICombattantRepo;
 import masi.rpg.dal.repositories.interfaces.INewPersoRepo;
 import masi.rpg.dal.repositories.interfaces.IPersoRepo;
-import masi.rpg.model.databaseModel.Classe;
+import masi.rpg.model.DetailCombattant;
 import masi.rpg.model.databaseModel.Combattant;
 import masi.rpg.model.databaseModel.Perso;
 
@@ -52,11 +53,16 @@ public class PersoService implements IPersoService {
         }
     }
 
-    public void SetEquipe(List<Combattant> equipe, char nom) {
+    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom) {
+        List<DetailCombattant> _equipe = new ArrayList();
         for (Combattant combattant : equipe) {
-            combattant.setEquipe(nom);
-            combattant.setCaseDispo(4);
+            DetailCombattant dc = new DetailCombattant();
+            dc.setCombattant(combattant);
+            dc.setEquipe(nom);
+            dc.setCaseContact(new ArrayList());
+            _equipe.add(dc);
         }
+        return _equipe;
     }
 
     public void GetById(int id) {

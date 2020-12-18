@@ -2,28 +2,30 @@ package masi.rpg.app;
 
 import java.util.List;
 import java.util.Random;
-
-import masi.rpg.model.databaseModel.Combattant;
+import masi.rpg.model.DetailCombattant;
 
 public class Combat {
-    private List<Combattant> list;
-    private Combattant combattant;
-    private Combattant adversaire;
+    private List<DetailCombattant> EquipeEnnemie;
+    private DetailCombattant combattant;
+    private DetailCombattant adversaire;
     private Boolean agro;
 
-    public Combat(List<Combattant> list, Combattant combattant) {
+    public Combat(List<DetailCombattant> EquipeEnnemie, DetailCombattant combattant) {
         this.combattant = combattant;
-        this.list = list;
+        this.EquipeEnnemie = EquipeEnnemie;
         this.agro = false;
-        Init();
-        Agro();
-        Attaque();
 
+        while (!EquipeEnnemie.isEmpty()) {
+            Init();
+            if (combattant.getCombattant().getPVVal() != 0) Agro();
+            if (agro && combattant.getCombattant().getPVVal() != 0) Attaque();
+            if (combattant.getCombattant().getPVVal() == 0) break;
+        }
     }
 
     private void Init() {
         try {
-            Thread.sleep(1000 / combattant.getInitVal());
+            Thread.sleep(1000 / combattant.getCombattant().getInitVal());
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -32,50 +34,58 @@ public class Combat {
 
     private void Agro() {
         if(agro) return;
-        else if (combattant.getCaseDispo() != 4){
-            System.out.println(String.format("%s est deja engagé", adversaire.getPrenom()));
+        else if (!combattant.getCaseContact().isEmpty()){
+            System.out.println(String.format("%s est deja engagé", combattant.getCombattant().getPrenom()));
+            adversaire = combattant.getCaseContact().get(0);
             agro = true;
             return; 
         }
-        while (!agro) {
-            Random r = new Random();
-            adversaire = list.get(r.nextInt(list.size()));
-            if (adversaire.getCaseDispo() > 0) {
+        Random r = new Random();
+        while (!agro && !EquipeEnnemie.isEmpty()) {
+            adversaire = EquipeEnnemie.get(r.nextInt(EquipeEnnemie.size()));
+            if (adversaire.getCaseContact().size() < 4) {
                 System.out.println(
-                    String.format("%s prend %s pour cible", combattant.getPrenom(), adversaire.getPrenom()));
-                adversaire.fillCase();
+                    String.format("%s prend %s pour cible", combattant.getCombattant().getPrenom(), adversaire.getCombattant().getPrenom()));
+                adversaire.fillCaseContact(combattant);
                 agro = true;
             }
         }
     }
 
     private void Attaque() {
+        if(adversaire.getCombattant().getPVVal() <= 0) return;
         int degat = Degat();
         if(degat <= 0){
-            System.out.println(String.format("%s n'inflige pas de degats", combattant.getPrenom()));
+            System.out.println(String.format("%s n'inflige pas de degats", combattant.getCombattant().getPrenom()));
             return;
         }
-        System.out.println(String.format("%s inflige %d de degats à %s", combattant.getPrenom(), degat, adversaire.getPrenom()));
-        adversaire.setPVVal(adversaire.getPVVal() - degat);
-
+        System.out.println(String.format("%s inflige %d de degats à %s", combattant.getCombattant().getPrenom(), degat, adversaire.getCombattant().getPrenom()));
+        adversaire.getCombattant().setPVVal(adversaire.getCombattant().getPVVal() - degat);
+        if(adversaire.getCombattant().getPVVal() <= 0){
+            adversaire.getCombattant().setPVVal(0);
+            EquipeEnnemie.remove(adversaire);
+            combattant.clearCaseContact(adversaire);
+            agro = false;
+            System.out.println(String.format("%s est mort", adversaire.getCombattant().getPrenom()));
+        }
     }
 
     private int Degat(){
         System.out.println(
-                    String.format("%s attque %s", combattant.getPrenom(), adversaire.getPrenom()));
+                    String.format("%s attaque %s", combattant.getCombattant().getPrenom(), adversaire.getCombattant().getPrenom()));
         Random r = new Random();
         int esquive = r.nextInt(101);
-        if(esquive <= adversaire.getParadeVal()){
-            System.out.println(String.format("%s esquive l'attaque", adversaire.getPrenom()));
+        if(esquive <= adversaire.getCombattant().getParadeVal()){
+            System.out.println(String.format("%s esquive l'attaque", adversaire.getCombattant().getPrenom()));
             return 0;
         }
 
         int crit = r.nextInt(101);
-        if (crit <= combattant.getCritVal())
+        if (crit <= combattant.getCombattant().getCritVal())
         {
-            System.out.println(String.format("%s fait un coup critique", combattant.getPrenom()));
-            return combattant.getAtkVal();
+            System.out.println(String.format("%s fait un coup critique", combattant.getCombattant().getPrenom()));
+            return combattant.getCombattant().getAtkVal();
         }
-        return combattant.getAtkVal() - adversaire.getDefVal();
+        return combattant.getCombattant().getAtkVal() - adversaire.getCombattant().getDefVal();
     }
 }

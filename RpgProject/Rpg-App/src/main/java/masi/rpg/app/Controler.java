@@ -6,6 +6,7 @@ import java.util.List;
 
 import masi.rpg.bll.services.*;
 import masi.rpg.bll.services.interfaces.*;
+import masi.rpg.model.DetailCombattant;
 import masi.rpg.model.databaseModel.Combattant;
 
 public class Controler {
@@ -21,27 +22,25 @@ public class Controler {
         /*
          * for (int i = 0; i < 20; i++) { persoService.CreateNewPerso(); }
          */
+
         List<Combattant> view = persoService.GetCombattantView();
-        List<Combattant> viewTest = new ArrayList<Combattant>(view.subList(0, 2));
-        int size = viewTest.size();
-        persoService.SetEquipe(viewTest.subList(0, size / 2), 'A');
-        persoService.SetEquipe(viewTest.subList(size / 2, size), 'B');
+        int size = view.size();
+        List<DetailCombattant> equipeA = new ArrayList<>(persoService.SetEquipe(view.subList(0, size / 2), 'A'));
+        List<DetailCombattant> equipeB = new ArrayList<>(persoService.SetEquipe(view.subList(size / 2, size), 'B'));
 
         // --- Temps de combat ----
 
-        for (int i = 0; i < size / 2; i++) {
-            Combattant combattant = viewTest.get(i);
+        for (DetailCombattant combattant : equipeA) {
             Runnable r = (() -> {
-                new Combat(viewTest.subList(size / 2, size), combattant);
+                new Combat(equipeB, combattant);
             });
             Thread t = new Thread(r);
             t.start();
         }
 
-        for (int i = size / 2; i < size; i++) {
-            Combattant combattant = viewTest.get(i);
+        for (DetailCombattant combattant : equipeB) {
             Runnable r = (() -> {
-                new Combat(viewTest.subList(0, size / 2), combattant);
+                new Combat(equipeA, combattant);
             });
             Thread t = new Thread(r);
             t.start();
