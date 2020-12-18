@@ -32,7 +32,7 @@ public class Controler {
 
         for (DetailCombattant combattant : equipeA) {
             Runnable r = (() -> {
-                new Combat(equipeB, combattant);
+                new Combat(equipeB, combattant, persoService);
             });
             Thread t = new Thread(r);
             t.start();
@@ -40,7 +40,7 @@ public class Controler {
 
         for (DetailCombattant combattant : equipeB) {
             Runnable r = (() -> {
-                new Combat(equipeA, combattant);
+                new Combat(equipeA, combattant, persoService);
             });
             Thread t = new Thread(r);
             t.start();

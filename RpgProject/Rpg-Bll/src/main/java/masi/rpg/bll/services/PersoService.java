@@ -28,6 +28,7 @@ public class PersoService implements IPersoService {
         this.persoRepo = new PersoRepo(connect);
     }
 
+    //#region With Repo
     public void CreateNewPerso() {
         try {
             newPersoRepo.UseStorProc();
@@ -53,18 +54,6 @@ public class PersoService implements IPersoService {
         }
     }
 
-    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom) {
-        List<DetailCombattant> _equipe = new ArrayList();
-        for (Combattant combattant : equipe) {
-            DetailCombattant dc = new DetailCombattant();
-            dc.setCombattant(combattant);
-            dc.setEquipe(nom);
-            dc.setCaseContact(new ArrayList());
-            _equipe.add(dc);
-        }
-        return _equipe;
-    }
-
     public void GetById(int id) {
         try {
             Perso p = Mapping.toPerso(persoRepo.GetByID(id));
@@ -83,5 +72,24 @@ public class PersoService implements IPersoService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    //#endregion
+
+    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom) {
+        List<DetailCombattant> _equipe = new ArrayList();
+        for (Combattant combattant : equipe) {
+            DetailCombattant dc = new DetailCombattant();
+            dc.setCombattant(combattant);
+            dc.setEquipe(nom);
+            dc.setCaseContact(new ArrayList());
+            _equipe.add(dc);
+        }
+        return _equipe;
+    }
+
+    public void UpdatePVValue(Combattant c,  int degats){
+        if(degats == -1) c.setPVVAL(0);
+        c.setPVVal(c.getPVVal() - degats);
     }
 }

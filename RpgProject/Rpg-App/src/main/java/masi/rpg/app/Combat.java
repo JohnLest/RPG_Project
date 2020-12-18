@@ -2,24 +2,27 @@ package masi.rpg.app;
 
 import java.util.List;
 import java.util.Random;
+import masi.rpg.bll.services.interfaces.IPersoService;
 import masi.rpg.model.DetailCombattant;
 
 public class Combat {
+    private IPersoService persoService;
     private List<DetailCombattant> EquipeEnnemie;
     private DetailCombattant combattant;
     private DetailCombattant adversaire;
     private Boolean agro;
 
-    public Combat(List<DetailCombattant> EquipeEnnemie, DetailCombattant combattant) {
+    public Combat(List<DetailCombattant> EquipeEnnemie, DetailCombattant combattant, IPersoService persoService) {
+        this.persoService = persoService;
         this.combattant = combattant;
         this.EquipeEnnemie = EquipeEnnemie;
         this.agro = false;
 
         while (!EquipeEnnemie.isEmpty()) {
             Init();
-            if (combattant.getCombattant().getPVVal() != 0) Agro();
-            if (agro && combattant.getCombattant().getPVVal() != 0) Attaque();
-            if (combattant.getCombattant().getPVVal() == 0) break;
+            if (isAlive(combattant)) Agro();
+            if (agro && isAlive(combattant)) Attaque();
+            if (!isAlive(combattant)) break;
         }
     }
 
@@ -53,16 +56,16 @@ public class Combat {
     }
 
     private void Attaque() {
-        if(adversaire.getCombattant().getPVVal() <= 0) return;
+        if(!isAlive(adversaire)) return;
         int degat = Degat();
         if(degat <= 0){
             System.out.println(String.format("%s n'inflige pas de degats", combattant.getCombattant().getPrenom()));
             return;
         }
         System.out.println(String.format("%s inflige %d de degats à %s", combattant.getCombattant().getPrenom(), degat, adversaire.getCombattant().getPrenom()));
-        adversaire.getCombattant().setPVVal(adversaire.getCombattant().getPVVal() - degat);
-        if(adversaire.getCombattant().getPVVal() <= 0){
-            adversaire.getCombattant().setPVVal(0);
+        persoService.UpdatePVValue(adversaire.getCombattant(), degat );
+        if(!isAlive(adversaire)){
+            persoService.UpdatePVValue(adversaire.getCombattant(), -1);
             EquipeEnnemie.remove(adversaire);
             combattant.clearCaseContact(adversaire);
             agro = false;
@@ -87,5 +90,11 @@ public class Combat {
             return combattant.getCombattant().getAtkVal();
         }
         return combattant.getCombattant().getAtkVal() - adversaire.getCombattant().getDefVal();
+    }
+
+    private boolean isAlive(DetailCombattant dc){
+        if(dc.getCombattant().getPVVal() > 0)
+            return true;
+        return false;
     }
 }

@@ -7,6 +7,7 @@ import masi.rpg.model.databaseModel.Combattant;
 
 public interface IPersoService {
 
+    //#region With Repo
     /**
      * Launch newPerso() stored procedure
      */
@@ -19,13 +20,6 @@ public interface IPersoService {
     public List<Combattant> GetCombattantView();
     
     /**
-     * Prepare the teams
-     * @param equipe
-     * @param nom
-     */
-    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom);
-
-    /**
      * Get Row by ID 
      * @param id Value of the primary key
      */
@@ -37,5 +31,22 @@ public interface IPersoService {
      * @param id Id to update
      */
     public void UpdateView(Combattant c, int id);
+
+    //#endregion
+
+    /**
+     * Prepare the teams
+     * @param equipe
+     * @param nom
+     */
+    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom);
+
+    /**
+     * Update the life points's combattant
+     * @param c
+     * @param degats
+     */
+    public void UpdatePVValue(Combattant c,  int degats);
+
     
 }
