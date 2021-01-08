@@ -10,6 +10,8 @@ public class Combat {
     private List<DetailCombattant> EquipeEnnemie;
     private DetailCombattant combattant;
     private DetailCombattant adversaire;
+    private int atk;
+    private int def;
     private Boolean agro;
 
     public Combat(List<DetailCombattant> EquipeEnnemie, DetailCombattant combattant, IPersoService persoService) {
@@ -17,13 +19,19 @@ public class Combat {
         this.combattant = combattant;
         this.EquipeEnnemie = EquipeEnnemie;
         this.agro = false;
+        this.atk = combattant.getCombattant().getAtkVal();
+        Combat();
+    }
 
+    private void Combat(){
         while (!EquipeEnnemie.isEmpty()) {
+            System.out.println("nouveau tours pour " + combattant.getCombattant().getPrenom());
             Init();
             if (isAlive(combattant)) Agro();
             if (agro && isAlive(combattant)) Attaque();
             if (!isAlive(combattant)) break;
         }
+        System.out.println("Fin du tour");
     }
 
     private void Init() {
@@ -40,12 +48,14 @@ public class Combat {
         else if (!combattant.getCaseContact().isEmpty()){
             System.out.println(String.format("%s est deja engagé", combattant.getCombattant().getPrenom()));
             adversaire = combattant.getCaseContact().get(0);
+            def = adversaire.getCombattant().getDefVal();
             agro = true;
             return; 
         }
         Random r = new Random();
         while (!agro && !EquipeEnnemie.isEmpty()) {
             adversaire = EquipeEnnemie.get(r.nextInt(EquipeEnnemie.size()));
+            def = adversaire.getCombattant().getDefVal();
             if (adversaire.getCaseContact().size() < 4) {
                 System.out.println(
                     String.format("%s prend %s pour cible", combattant.getCombattant().getPrenom(), adversaire.getCombattant().getPrenom()));
@@ -75,7 +85,12 @@ public class Combat {
 
     private int Degat(){
         System.out.println(
-                    String.format("%s attaque %s", combattant.getCombattant().getPrenom(), adversaire.getCombattant().getPrenom()));
+                    String.format(
+                        "%s (%d) attaque %s (%d)", 
+                        combattant.getCombattant().getPrenom(), combattant.getCombattant().getPVVal(), 
+                        adversaire.getCombattant().getPrenom(), adversaire.getCombattant().getPVVal()
+                        )
+                    );
         Random r = new Random();
         int esquive = r.nextInt(101);
         if(esquive <= adversaire.getCombattant().getParadeVal()){

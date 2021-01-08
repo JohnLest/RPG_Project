@@ -65,6 +65,7 @@ public class PersoService implements IPersoService {
 
     public void UpdateView(Combattant c, int id) {
         try {
+            c.setNbrCombat(c.getNbrCombat() + 1);
             Perso perso = Mapping.combattantToPerso(c);
             String where = String.format("ID_Perso = %d", id);
             persoRepo.Update(perso, where);
@@ -89,7 +90,7 @@ public class PersoService implements IPersoService {
     }
 
     public void UpdatePVValue(Combattant c,  int degats){
-        if(degats == -1) c.setPVVAL(0);
-        c.setPVVal(c.getPVVal() - degats);
+        if(degats == -1) c.setPVVal(0);
+        else c.setPVVal(c.getPVVal() - degats);
     }
 }
