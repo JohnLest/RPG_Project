@@ -46,7 +46,14 @@ public interface IPersoService {
      * @param c
      * @param degats
      */
-    public void UpdatePVValue(Combattant c,  int degats);
+    public void UpdatePVValue(DetailCombattant c,  int degats);
+
+    /**
+     * Check is the first combat
+     * @param c
+     * @return
+     */
+    public boolean IsFirstCombat(DetailCombattant c);
 
     
 }

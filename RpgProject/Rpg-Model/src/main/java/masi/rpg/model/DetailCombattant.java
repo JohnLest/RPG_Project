@@ -10,6 +10,9 @@ public class DetailCombattant implements Serializable{
     private Combattant combattant;
     private List<DetailCombattant> caseContact;
     private char equipe;
+    private int pvPerdu;
+    private int pvGagne;
+    private short isFirstCombat;
 
     public Combattant getCombattant(){
         return this.combattant;
@@ -36,5 +39,26 @@ public class DetailCombattant implements Serializable{
     }
     public void setEquipe(char val) {
         this.equipe = val;
+    }
+
+    public int getPVPerdu(){
+        return this.pvPerdu;
+    }
+    public void setPVPerdu(int val){
+        this.pvPerdu = val;
+    }
+
+    public int getPVGagner(){
+        return this.pvGagne;
+    }
+    public void setPVGagner(int val){
+        this.pvGagne = val;
+    }
+
+    public short getIsFirstcombat(){
+        return this.isFirstCombat;
+    }
+    public void setIsFirstCombat(short val){
+        this.isFirstCombat = val;
     }
 }

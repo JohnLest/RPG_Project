@@ -3,10 +3,12 @@ package masi.rpg.app;
 import java.util.List;
 import java.util.Random;
 import masi.rpg.bll.services.interfaces.IPersoService;
+import masi.rpg.bll.services.interfaces.IStatService;
 import masi.rpg.model.DetailCombattant;
 
 public class Combat {
     private IPersoService persoService;
+    private IStatService statService;
     private List<DetailCombattant> EquipeEnnemie;
     private DetailCombattant combattant;
     private DetailCombattant adversaire;
@@ -14,16 +16,22 @@ public class Combat {
     private int def;
     private Boolean agro;
 
-    public Combat(List<DetailCombattant> EquipeEnnemie, DetailCombattant combattant, IPersoService persoService) {
+    public Combat(
+            List<DetailCombattant> EquipeEnnemie, 
+            DetailCombattant combattant, 
+            IPersoService persoService, 
+            IStatService statService) {
         this.persoService = persoService;
+        this.statService = statService;
         this.combattant = combattant;
         this.EquipeEnnemie = EquipeEnnemie;
         this.agro = false;
-        this.atk = combattant.getCombattant().getAtkVal();
         Combat();
     }
 
     private void Combat(){
+        if(persoService.IsFirstCombat(combattant)) 
+            System.out.println(String.format("Premier combat pour %s", combattant.getCombattant().getPrenom()));
         while (!EquipeEnnemie.isEmpty()) {
             System.out.println("nouveau tours pour " + combattant.getCombattant().getPrenom());
             Init();
@@ -73,9 +81,10 @@ public class Combat {
             return;
         }
         System.out.println(String.format("%s inflige %d de degats à %s", combattant.getCombattant().getPrenom(), degat, adversaire.getCombattant().getPrenom()));
-        persoService.UpdatePVValue(adversaire.getCombattant(), degat );
+        persoService.UpdatePVValue(adversaire, degat );
         if(!isAlive(adversaire)){
-            persoService.UpdatePVValue(adversaire.getCombattant(), -1);
+            persoService.UpdatePVValue(adversaire, -1);
+            statService.InsertStatPerso(adversaire);
             EquipeEnnemie.remove(adversaire);
             combattant.clearCaseContact(adversaire);
             agro = false;

@@ -38,10 +38,10 @@ public class StatPerso implements Serializable {
         this.pvGagne = val;
     }
 
-    public short getIsFirstcombat(){
+    public short getIsFirstCombat(){
         return this.isFirstCombat;
     }
-    public void setIsFirstCombat(Short val){
+    public void setIsFirstCombat(short val){
         this.isFirstCombat = val;
     }
 

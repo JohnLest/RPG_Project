@@ -12,9 +12,11 @@ import masi.rpg.model.databaseModel.Combattant;
 public class Controler {
 
     private IPersoService persoService;
+    private IStatService statService;
 
     public Controler(Connection connect) {
         this.persoService = new PersoService(connect);
+        this.statService = new StatService(connect);
         Controler();
     }
 
@@ -27,13 +29,18 @@ public class Controler {
         List<DetailCombattant> equipeA = new ArrayList<>(persoService.SetEquipe(view.subList(0, size / 2), 'A'));
         List<DetailCombattant> equipeB = new ArrayList<>(persoService.SetEquipe(view.subList(size / 2, size), 'B'));
 
+        //persoService.UpdateView(view.get(1), view.get(1).getID());
+        //statService.InsertStatPerso(equipeA.get(1));
+
+        
+
         // --- Temps de combat ----
         List<Thread> tList = new ArrayList<>();
 
         for (DetailCombattant combattant : equipeA) {
             Runnable r = (() -> {
                 System.out.println("Combat A");
-                new Combat(equipeB, combattant, persoService);
+                new Combat(equipeB, combattant, persoService, statService);
             });
             Thread t = new Thread(r);
             tList.add(t);
@@ -43,7 +50,7 @@ public class Controler {
         for (DetailCombattant combattant : equipeB) {
             Runnable r = (() -> {
                 System.out.println("Combat B");
-                new Combat(equipeA, combattant, persoService);
+                new Combat(equipeA, combattant, persoService, statService);
             });
             Thread t = new Thread(r);
             tList.add(t);
@@ -66,7 +73,6 @@ public class Controler {
         for (Combattant combattant : view) {
             persoService.UpdateView(combattant, combattant.getID());
         }
-
 
         System.out.println("Stop1");
         System.out.println("Stop2");

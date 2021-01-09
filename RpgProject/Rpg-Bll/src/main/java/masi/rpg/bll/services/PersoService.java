@@ -89,8 +89,23 @@ public class PersoService implements IPersoService {
         return _equipe;
     }
 
-    public void UpdatePVValue(Combattant c,  int degats){
-        if(degats == -1) c.setPVVal(0);
-        else c.setPVVal(c.getPVVal() - degats);
+    public void UpdatePVValue(DetailCombattant c,  int degats){
+        if(degats == -1) c.getCombattant().setPVVal(0);
+        else 
+        {
+            c.getCombattant().setPVVal(c.getCombattant().getPVVal() - degats);
+            c.setPVPerdu(c.getPVPerdu() + degats);
+        }
+    }
+
+    public boolean IsFirstCombat(DetailCombattant c){
+        if(c.getCombattant().getNbrCombat() == 0){
+            c.setIsFirstCombat((short)1);
+            return true;
+        }
+        else{
+            c.setIsFirstCombat((short)0);
+            return false;
+        }
     }
 }

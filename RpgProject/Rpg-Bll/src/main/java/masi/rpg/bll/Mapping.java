@@ -1,5 +1,6 @@
 package masi.rpg.bll;
 
+import masi.rpg.model.DetailCombattant;
 import masi.rpg.model.databaseModel.*;
 
 public class Mapping {
@@ -20,5 +21,16 @@ public class Mapping {
         p.setNbrCombat(c.getNbrCombat());
         
         return p;
+    }
+
+    public static StatPerso dcombattantToStatPerso(DetailCombattant dc){
+        StatPerso sp = new StatPerso();
+        sp.setID_Perso(dc.getCombattant().getID());
+        sp.setPVPerdu(dc.getPVPerdu());
+        sp.setPVGagner(dc.getPVGagner());
+        sp.setIsFirstCombat(dc.getIsFirstcombat());
+        sp.setID_Stat_Equipe(1);
+
+        return sp;
     }
 }
