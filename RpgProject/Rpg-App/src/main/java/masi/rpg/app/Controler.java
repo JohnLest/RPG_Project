@@ -26,7 +26,7 @@ public class Controler {
          */
         List<Combattant> view = persoService.GetCombattantView();
         int size = view.size();
-        List<DetailCombattant> equipeA = new ArrayList<>(persoService.SetEquipe(view.subList(0, size / 2), 'A'));
+        List<DetailCombattant> equipeA = new ArrayList<>(persoService.SetEquipe(view.subList(0, size / 2), 'A'));     
         List<DetailCombattant> equipeB = new ArrayList<>(persoService.SetEquipe(view.subList(size / 2, size), 'B'));
 
         //persoService.UpdateView(view.get(1), view.get(1).getID());
