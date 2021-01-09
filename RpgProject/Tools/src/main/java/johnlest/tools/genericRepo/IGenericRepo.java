@@ -86,17 +86,24 @@ public interface IGenericRepo {
 
     /**
      * Update all table
-     * @param update
+     * @param update Elem to Update
      * @throws SQLException
      */
     public int Update(Object update) throws SQLException;
 
     /**
      * Update the table with condition
-     * @param update
-     * @param where
+     * @param update Elem to update
+     * @param where Condition
      * @throws SQLException
      */
     public int Update(Object update, String where) throws SQLException;
+
+    /**
+     * Insert in the table
+     * @param insert Obect to insert
+     * @throws SQLException
+     */
+    public int Insert(Object insert) throws SQLException;
 }
 

@@ -1,6 +1,7 @@
 package johnlest.tools.genericRepo;
 
 import java.sql.*;
+import java.time.chrono.ThaiBuddhistChronology;
 import java.util.*;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -113,6 +114,12 @@ public class GenericRepo implements IGenericRepo {
         return ResultUpdateInsert(query);
     }
 
+    public int Insert(Object insert) throws SQLException {
+        String setStr = Bean2string(insert, false);
+        String query = String.format("INSERT INTO %s %s ;", table, setStr);
+        return ResultUpdateInsert(query);
+    }
+
     //#endregion
 
     //#region private Methode
@@ -179,10 +186,15 @@ public class GenericRepo implements IGenericRepo {
      */
     private String StringForInsert(Set<Map.Entry<String, String>> set) {
         String setStr = ""; 
+        String colName = "";
+        String val = "";
         for (Map.Entry<String, String>m: set) {
-            setStr = String.format("%s %s = '%s',",setStr, m.getKey(), m.getValue());
+            colName = String.format("%s %s,", colName, m.getKey());
+            val = String.format("%s '%s',", val, m.getValue());
         }
-        return Tools.RemoveLastChar(setStr, 1);
+        setStr = String.format("(%s) VALUES (%s)", 
+            Tools.RemoveLastChar(colName, 1), Tools.RemoveLastChar(val, 1));
+        return setStr;
     }
     /**
      * Execute the query
