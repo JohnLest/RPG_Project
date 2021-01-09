@@ -60,7 +60,22 @@ public interface IGenericRepo {
      * @throws SQLException
      */
     public Object GetFirst(List<String> elem, String where) throws SQLException;
-    
+
+    /**
+     * Get one ramdom row
+     * @return random row
+     * @throws SQLException
+     */
+    public Object GetOneRandom() throws SQLException;
+
+    /**
+     * Get one ramdom row with condition  
+     * @param where condition 
+     * @return random row
+     * @throws SQLException
+     */
+    public Object GetOneRandom(String where) throws SQLException;
+
     /**
      * Count number of row in table
      * @return Number

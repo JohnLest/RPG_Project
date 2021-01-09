@@ -85,6 +85,16 @@ public class GenericRepo implements IGenericRepo {
         return ResultRowBean(query);
     }
 
+    public Object GetOneRandom() throws SQLException {
+        String query = String.format("SELECT * FROM %s ORDER BY RAND() LIMIT 1 ;", table);
+        return ResultRowBean(query);
+    }
+
+    public Object GetOneRandom(String where) throws SQLException {
+        String query = String.format("SELECT * FROM %s WHERE %s ORDER BY RAND() LIMIT 1 ;", table, where);
+        return ResultRowBean(query);
+    }
+
     public int Count() throws SQLException {
         String query = String.format("SELECT COUNT (*) FROM %s ;", table);
         Object res = Arrays.asList(ResultRowObject(query)).stream().findFirst();
