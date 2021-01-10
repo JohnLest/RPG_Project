@@ -3,6 +3,7 @@ package masi.rpg.bll.services.interfaces;
 import java.util.List;
 
 import masi.rpg.model.DetailCombattant;
+import masi.rpg.model.Equipe;
 import masi.rpg.model.databaseModel.Combattant;
 
 public interface IPersoService {
@@ -37,9 +38,8 @@ public interface IPersoService {
     /**
      * Prepare the teams
      * @param equipe
-     * @param nom
      */
-    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom);
+    public Equipe SetEquipe(List<Combattant> equipe);
 
     /**
      * Update the life points's combattant

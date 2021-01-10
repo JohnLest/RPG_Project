@@ -115,10 +115,11 @@ public interface IGenericRepo {
     public int Update(Object update, String where) throws SQLException;
 
     /**
-     * Insert in the table
+     * Insert in the table and return the primary key
      * @param insert Obect to insert
+     * @return primary key generate 
      * @throws SQLException
      */
-    public int Insert(Object insert) throws SQLException;
+    public Object Insert(Object insert) throws SQLException;
 }
 

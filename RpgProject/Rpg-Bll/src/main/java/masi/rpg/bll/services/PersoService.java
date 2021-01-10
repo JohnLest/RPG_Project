@@ -14,8 +14,11 @@ import masi.rpg.dal.repositories.interfaces.ICombattantRepo;
 import masi.rpg.dal.repositories.interfaces.INewPersoRepo;
 import masi.rpg.dal.repositories.interfaces.IPersoRepo;
 import masi.rpg.model.DetailCombattant;
+import masi.rpg.model.Equipe;
 import masi.rpg.model.databaseModel.Combattant;
 import masi.rpg.model.databaseModel.Perso;
+import masi.rpg.model.databaseModel.StatEquipe;
+import masi.rpg.model.databaseModel.StatPerso;
 
 public class PersoService implements IPersoService {
     private ICombattantRepo combattantRepo;
@@ -77,15 +80,26 @@ public class PersoService implements IPersoService {
 
     //#endregion
 
-    public List<DetailCombattant> SetEquipe(List<Combattant> equipe, char nom) {
-        List<DetailCombattant> _equipe = new ArrayList();
+    public Equipe SetEquipe(List<Combattant> equipe) {
+        Equipe _equipe = new Equipe();
+        _equipe.setStatEquipe(new StatEquipe());
+        List<DetailCombattant> dcLst = new ArrayList();
         for (Combattant combattant : equipe) {
             DetailCombattant dc = new DetailCombattant();
+            dc.setStatPerso(new StatPerso());
             dc.setCombattant(combattant);
-            dc.setEquipe(nom);
             dc.setCaseContact(new ArrayList());
-            _equipe.add(dc);
+            dcLst.add(dc);
+
+            if(combattant.getClasse().equals("Guerrier")) _equipe.getStatEquipe().incremanteNbrGuerriers();
+            else if (combattant.getClasse().equals("Mage")) _equipe.getStatEquipe().incremanteNbrMage();
+            else if (combattant.getClasse().equals("Prêtre")) _equipe.getStatEquipe().incremanteNbrPretre();
+            else if (combattant.getClasse().equals("Voleur")) _equipe.getStatEquipe().incremanteNbrVoleurs();
+
+            _equipe.getStatEquipe().setTotalPV(_equipe.getStatEquipe().getTotalPV() + combattant.getPVVal());
         }
+        _equipe.setDetailCombattant(dcLst);
+
         return _equipe;
     }
 
@@ -94,17 +108,17 @@ public class PersoService implements IPersoService {
         else 
         {
             c.getCombattant().setPVVal(c.getCombattant().getPVVal() - degats);
-            c.setPVPerdu(c.getPVPerdu() + degats);
+            c.getStatPerso().setPVPerdu(c.getStatPerso().getPVPerdu() + degats);
         }
     }
 
     public boolean IsFirstCombat(DetailCombattant c){
         if(c.getCombattant().getNbrCombat() == 0){
-            c.setIsFirstCombat((short)1);
+            c.getStatPerso().setIsFirstCombat((short)1);
             return true;
         }
         else{
-            c.setIsFirstCombat((short)0);
+            c.getStatPerso().setIsFirstCombat((short)0);
             return false;
         }
     }

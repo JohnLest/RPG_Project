@@ -1,10 +1,10 @@
 package johnlest.tools.genericRepo;
 
 import java.sql.*;
-import java.time.chrono.ThaiBuddhistChronology;
 import java.util.*;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -115,19 +115,19 @@ public class GenericRepo implements IGenericRepo {
     public int Update(Object update) throws SQLException {
         String setStr = Bean2string(update, true);
         String query = String.format("UPDATE %s SET %s ;", table, setStr);
-        return ResultUpdateInsert(query);
+        return ResultUpdate(query);
     }
 
     public int Update(Object update, String where) throws SQLException {
         String setStr = Bean2string(update, true);
         String query = String.format("UPDATE %s SET %s WHERE %s ;", table, setStr, where);
-        return ResultUpdateInsert(query);
+        return ResultUpdate(query);
     }
 
-    public int Insert(Object insert) throws SQLException {
+    public Object Insert(Object insert) throws SQLException {
         String setStr = Bean2string(insert, false);
         String query = String.format("INSERT INTO %s %s ;", table, setStr);
-        return ResultUpdateInsert(query);
+        return ResultInsert(query);
     }
 
     //#endregion
@@ -232,16 +232,32 @@ public class GenericRepo implements IGenericRepo {
         return table;
     }
     /**
-     * Update or Insert the query
+     * Update the query
      * @param query SQL Query
      * @return nbr or row impact
      * @throws SQLException
      */
-    private int ResultUpdateInsert(String query) throws SQLException {
+    private int ResultUpdate(String query) throws SQLException {
         return qRunner.update(
             connection, 
             query
             );
+    }
+
+    /**
+     * Insert the query
+     * @param query
+     * @return primary key
+     * @throws SQLException
+     */
+    private Object ResultInsert(String query) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        statement.executeUpdate();
+        ResultSet rs =  statement.getGeneratedKeys();
+        if(rs != null && rs.next()){
+            return rs.getObject(1);
+        }
+        return null;
     }
     /**
      * Return the result to a list

@@ -1,18 +1,15 @@
 package masi.rpg.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import masi.rpg.model.databaseModel.Combattant;
+import masi.rpg.model.databaseModel.StatPerso;
 
 public class DetailCombattant implements Serializable{
     
     private Combattant combattant;
     private List<DetailCombattant> caseContact;
-    private char equipe;
-    private int pvPerdu;
-    private int pvGagne;
-    private short isFirstCombat;
+    private StatPerso statPerso;
 
     public Combattant getCombattant(){
         return this.combattant;
@@ -34,31 +31,10 @@ public class DetailCombattant implements Serializable{
         if(!this.caseContact.isEmpty()) this.caseContact.remove(c);
     }
 
-    public char getEquipe() {
-        return this.equipe;
+    public StatPerso getStatPerso(){
+        return this.statPerso;
     }
-    public void setEquipe(char val) {
-        this.equipe = val;
-    }
-
-    public int getPVPerdu(){
-        return this.pvPerdu;
-    }
-    public void setPVPerdu(int val){
-        this.pvPerdu = val;
-    }
-
-    public int getPVGagner(){
-        return this.pvGagne;
-    }
-    public void setPVGagner(int val){
-        this.pvGagne = val;
-    }
-
-    public short getIsFirstcombat(){
-        return this.isFirstCombat;
-    }
-    public void setIsFirstCombat(short val){
-        this.isFirstCombat = val;
+    public void setStatPerso(StatPerso sp){
+        this.statPerso = sp;
     }
 }

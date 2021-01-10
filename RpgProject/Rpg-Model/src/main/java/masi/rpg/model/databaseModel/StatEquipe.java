@@ -63,12 +63,18 @@ public class StatEquipe implements Serializable {
     public void setNbrGuerriers(short val){
         this.nbrGuerriers = val;
     }
+    public void incremanteNbrGuerriers(){
+        this.nbrGuerriers = (short)(this.nbrGuerriers + 1);
+    }
 
     public short getNbrMage(){
         return nbrMages;
     }
     public void setNbrMage(short val){
         this.nbrMages = val;
+    }
+    public void incremanteNbrMage(){
+        this.nbrMages = (short)(this.nbrMages + 1);
     }
 
     public short getNbrVoleurs(){
@@ -77,12 +83,18 @@ public class StatEquipe implements Serializable {
     public void setNbrVoleurs(short val){
         this.nbrVoleurs = val;
     }
+    public void incremanteNbrVoleurs(){
+        this.nbrVoleurs = (short)(this.nbrVoleurs + 1);
+    }
 
     public short getNbrPretre(){
         return nbrPretres;
     }
     public void setNbrPretre(short val){
         this.nbrPretres = val;
+    }    
+    public void incremanteNbrPretre(){
+        this.nbrPretres = (short)(this.nbrPretres + 1);
     }
 
     public short getNbrSurvivant(){

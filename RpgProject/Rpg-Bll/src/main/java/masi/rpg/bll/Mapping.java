@@ -29,6 +29,7 @@ public class Mapping {
         return p;
     }
 
+    /*
     public static StatPerso dcombattantToStatPerso(DetailCombattant dc){
         StatPerso sp = new StatPerso();
         sp.setID_Perso(dc.getCombattant().getID());
@@ -38,5 +39,5 @@ public class Mapping {
         sp.setID_Stat_Equipe(1);
 
         return sp;
-    }
+    }*/
 }
