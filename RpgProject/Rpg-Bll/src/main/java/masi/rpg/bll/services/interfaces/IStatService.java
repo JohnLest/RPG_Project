@@ -79,4 +79,11 @@ public interface IStatService {
      * @param id
      */
     public void setLooser(StatCombat sc, int id);
+
+    /**
+     * Set Strat id in StatEquipe model
+     * @param se StatEquipe
+     * @param strat strat ID 
+     */
+    public void setStrat(StatEquipe se, int strat);
 }

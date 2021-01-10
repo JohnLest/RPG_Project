@@ -100,4 +100,8 @@ public class StatService implements IStatService {
         sc.setID_EquipeVaincu(id);
     }
 
+    public void setStrat(StatEquipe se, int strat){
+        se.setID_Strat(strat);
+    }
+
 }

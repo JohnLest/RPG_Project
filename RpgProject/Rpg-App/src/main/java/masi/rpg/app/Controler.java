@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import masi.rpg.app.combat.*;
 import masi.rpg.bll.services.*;
 import masi.rpg.bll.services.interfaces.*;
 import masi.rpg.model.DetailCombattant;
@@ -15,10 +16,12 @@ public class Controler {
 
     private IPersoService persoService;
     private IStatService statService;
+    private IStratService stratService;
 
     public Controler(Connection connect) {
         this.persoService = new PersoService(connect);
         this.statService = new StatService(connect);
+        this.stratService = new StratService(connect);
         Controler();
     }
 
@@ -30,9 +33,9 @@ public class Controler {
         int size = view.size();
 
         Equipe equipeA = persoService.SetEquipe(view.subList(0, size / 2));
-        equipeA.getStatEquipe().setID_Strat(1);
+        statService.setStrat(equipeA.getStatEquipe(), stratService.getStrat().getID_Strat());
         Equipe equipeB = persoService.SetEquipe(view.subList(size / 2, size));
-        equipeB.getStatEquipe().setID_Strat(1);
+        statService.setStrat(equipeB.getStatEquipe(), stratService.getStrat().getID_Strat());
 
         statService.InsertStatEquipe(equipeA.getStatEquipe());
         statService.InsertStatEquipe(equipeB.getStatEquipe());
@@ -47,7 +50,15 @@ public class Controler {
                     equipeA.getStatEquipe(), 
                     combattant.getCombattant()
                     );
-                new Combat(equipeB, equipeA, combattant, persoService, statService);
+                switch (equipeA.getStatEquipe().getID_Strat()) {
+                    case 1:
+                        new Combat(equipeB, equipeA, combattant, persoService, statService);
+                        break;
+                
+                    default:
+                        break;
+                }
+                
             });
             Thread t = new Thread(r);
             tList.add(t);
