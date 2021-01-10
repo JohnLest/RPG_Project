@@ -89,4 +89,12 @@ public class GenericCombat {
             return true;
         return false;
     }
+
+    protected boolean checkRestClasse(String classe){
+        for (DetailCombattant dc : lstEnnemie) {
+            if(dc.getCombattant().getClasse().equals(classe))
+                return true;
+        }
+        return false;
+    }
 }
