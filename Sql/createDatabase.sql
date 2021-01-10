@@ -51,7 +51,7 @@ CREATE TABLE `rpg.prenom` (
 
 CREATE TABLE `rpg.stat_combat` (
   `ID_StatCombat` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `DateCombat` date NOT NULL,
+  `DateCombat` datetime NOT NULL,
   `ID_EquipeVainqueur` int UNSIGNED NOT NULL,
   `ID_EquipeVaincu` int UNSIGNED NOT NULL,
   PRIMARY KEY (`ID_StatCombat`),

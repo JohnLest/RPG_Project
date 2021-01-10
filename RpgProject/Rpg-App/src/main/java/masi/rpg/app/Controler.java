@@ -9,6 +9,7 @@ import masi.rpg.bll.services.interfaces.*;
 import masi.rpg.model.DetailCombattant;
 import masi.rpg.model.Equipe;
 import masi.rpg.model.databaseModel.Combattant;
+import masi.rpg.model.databaseModel.StatCombat;
 
 public class Controler {
 
@@ -79,12 +80,20 @@ public class Controler {
         for (Combattant combattant : view) {
             persoService.UpdateView(combattant, combattant.getID());
         }
-
         statService.updateStatEquipe(equipeA.getStatEquipe(), equipeA.getDetailCombattant().size());
         statService.updateStatEquipe(equipeB.getStatEquipe(), equipeB.getDetailCombattant().size());
 
-        System.out.println("Stop1");
-        System.out.println("Stop2");
+        StatCombat sc = new StatCombat();
+        if(equipeA.getDetailCombattant().size() > 0 ){
+            statService.setWinner(sc, equipeA.getStatEquipe().getID_StatEquipe());
+            statService.setLooser(sc, equipeB.getStatEquipe().getID_StatEquipe());
+        }
+        else if(equipeB.getDetailCombattant().size() > 0 ){
+            statService.setWinner(sc, equipeB.getStatEquipe().getID_StatEquipe());
+            statService.setLooser(sc, equipeA.getStatEquipe().getID_StatEquipe());
+        }
+        statService.InsertStatCombat(sc);
+
         // ------------------------
 
     }

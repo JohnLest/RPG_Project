@@ -1,6 +1,7 @@
 package masi.rpg.bll.services.interfaces;
 
 import masi.rpg.model.databaseModel.Combattant;
+import masi.rpg.model.databaseModel.StatCombat;
 import masi.rpg.model.databaseModel.StatEquipe;
 import masi.rpg.model.databaseModel.StatPerso;
 
@@ -17,6 +18,12 @@ public interface IStatService {
      * @return primary key generate
      */
     public int InsertStatEquipe(StatEquipe se);
+
+    /**
+     * Insert in stat_combat table the sc's data
+     * @param sc Data to import : StatCombat
+     */
+    public void InsertStatCombat(StatCombat sc);
 
     /**
      * Update StatEquipe after combat
@@ -58,4 +65,18 @@ public interface IStatService {
      * @param survivant value
      */
     public void updateSurvivant(StatEquipe se, short survivant);
+
+    /**
+     * Set ID teams winner
+     * @param sc
+     * @param id
+     */
+    public void setWinner(StatCombat sc, int id);
+
+    /**
+     * Set ID teams looser
+     * @param sc
+     * @param id
+     */
+    public void setLooser(StatCombat sc, int id);
 }
