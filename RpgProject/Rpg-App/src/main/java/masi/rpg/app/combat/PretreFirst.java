@@ -19,7 +19,7 @@ public class PretreFirst extends GenericCombat {
         classe = "Prêtre";
         Combat();
     }
-    private void Combat(){
+    protected void Combat(){
         if(persoService.IsFirstCombat(combattant)) 
             System.out.println(String.format("Premier combat pour %s", combattant.getCombattant().getPrenom()));
         while (!lstEnnemie.isEmpty()) {
@@ -33,7 +33,7 @@ public class PretreFirst extends GenericCombat {
         System.out.println("Fin du tour");
     }
 
-    private void Agro() {
+    protected void Agro() {
         if(agro) return;
         else if (!combattant.getCaseContact().isEmpty()){
             System.out.println(String.format("%s est deja engagé", combattant.getCombattant().getPrenom()));

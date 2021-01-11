@@ -104,11 +104,15 @@ public class PersoService implements IPersoService {
     }
 
     public void UpdatePVValue(DetailCombattant c,  int degats){
-        if(degats == -1) c.getCombattant().setPVVal(0);
-        else 
+        if(degats == 0) c.getCombattant().setPVVal(0);
+        else if(degats > 0)
         {
             c.getCombattant().setPVVal(c.getCombattant().getPVVal() - degats);
             c.getStatPerso().setPVPerdu(c.getStatPerso().getPVPerdu() + degats);
+        }
+        else if(degats < 0){
+            c.getCombattant().setPVVal(c.getCombattant().getPVVal() - degats);
+            c.getStatPerso().setPVGagner(c.getStatPerso().getPVGagner() - degats);
         }
     }
 

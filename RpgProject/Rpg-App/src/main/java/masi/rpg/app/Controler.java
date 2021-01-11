@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.AbstractDocument.BranchElement;
+
 import masi.rpg.app.combat.*;
 import masi.rpg.bll.services.*;
 import masi.rpg.bll.services.interfaces.*;
@@ -50,15 +52,7 @@ public class Controler {
                     equipeA.getStatEquipe(), 
                     combattant.getCombattant()
                     );
-                switch (equipeA.getStatEquipe().getID_Strat()) {
-                    case 1:
-                        new Combat(equipeB, equipeA, combattant, persoService, statService);
-                        break;
-                
-                    default:
-                        break;
-                }
-                
+                SwitchStrat(equipeA, equipeB, combattant); 
             });
             Thread t = new Thread(r);
             tList.add(t);
@@ -72,7 +66,7 @@ public class Controler {
                     equipeB.getStatEquipe(), 
                     combattant.getCombattant()
                     );
-                new Combat(equipeA, equipeB, combattant, persoService, statService);
+                    SwitchStrat(equipeB, equipeA, combattant); 
             });
             Thread t = new Thread(r);
             tList.add(t);
@@ -108,4 +102,28 @@ public class Controler {
         // ------------------------
 
     }
+
+    private void SwitchStrat(Equipe equipe, Equipe ennemi, DetailCombattant combattant){
+        switch (equipe.getStatEquipe().getID_Strat()) {
+            case 1:
+                new Combat(ennemi, equipe, combattant, persoService, statService);
+                break;
+            case 2:
+                new NoHeal(ennemi, equipe, combattant, persoService, statService);
+                break;
+            case 3:
+                new GuerrierFirst(ennemi, equipe, combattant, persoService, statService);
+                break;
+            case 4:
+                new MageFirst(ennemi, equipe, combattant, persoService, statService);
+                break;
+            case 5:
+                new PretreFirst(ennemi, equipe, combattant, persoService, statService);
+                break;
+            case 6:
+                new VoleurFirst(ennemi, equipe, combattant, persoService, statService);
+                break;
+        }
+    }
 }
+
